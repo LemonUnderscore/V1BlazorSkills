@@ -28,7 +28,7 @@
                         }
             </select>
             <span>Years of Experience:</span>
-            <input type="number"/>
+            <input type="number" @bind="SelectionValueBindings[index]"/>
         </div>
     }
 
@@ -63,6 +63,12 @@
         {
             employee = EmployeeService.GetEmployee(Guid.Parse(Id));
             SelectedSkills = employee.EmployeeSkills;
+            foreach (KeyValuePair<string, int> item in SelectedSkills)
+            {
+                Guid skillId = SkillService.GetSkillIdByName(item.Key);
+                SelectionBindings.Add(skillId.ToString());
+                SelectionValueBindings.Add(item.Value);
+            }
         }
     }
 
