@@ -16,6 +16,19 @@
             }
         };
 
+        public void AddEmployee(Employee e)
+        {
+            var id = Guid.NewGuid();
+            e.Id = id;
+            _employees.Add(e);
+        }
+
+        public void DeleteEmployee(Guid id)
+        {
+            var e = GetEmployee(id);
+            _employees.Remove(e);
+        }
+
         public Employee GetEmployee(Guid id)
         {
             return _employees.SingleOrDefault(e => e.Id == id);

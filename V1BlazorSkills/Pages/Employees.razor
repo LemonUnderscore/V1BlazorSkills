@@ -1,7 +1,11 @@
 ﻿@page "/employees"
 <h3>Employees</h3>
 
+<a class="btn btn-success" href="editemployee/0">
+    Add New ➕
+</a>
 <table class="table">
+
     <thead>
         <tr>
             <td>
@@ -11,26 +15,34 @@
                 Name
             </td>
             <td></td>
+            <td></td>
         </tr>
     </thead>
+
     <tbody>
-        @foreach(var e in _employees)
+
+        @foreach(var emp in _employees)
         {
             <tr>
-            <td>
-                @e.Id
-            </td>
-            <td>
-                @e.Name
-            </td>
-            <td>
-                <a href="editemployee/@e.Id">
-                    Edit
-                </a>
-            </td>
-        </tr>
+                <td>
+                    @emp.Id
+                </td>
+                <td>
+                    @emp.Name
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="editemployee/@emp.Id">
+                        Edit 🖊
+                    </a>
+                </td>
+                <td>
+                    <button class="btn btn-danger" @onclick="@( e => OnDelete(emp.Id) )"> Delete 🗑 </button>
+                </td>
+            </tr>
         }
+
     </tbody>
+
 </table>
 
 @inject V1BlazorSkills.Data.IEmployeeService EmployeeService;
@@ -39,5 +51,10 @@
     protected override void OnInitialized()
     {
         _employees = EmployeeService.GetEmployees();
+    }
+
+    private void OnDelete(Guid id)
+    {
+        EmployeeService.DeleteEmployee(id);
     }
 }
