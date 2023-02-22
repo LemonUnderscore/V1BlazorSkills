@@ -41,6 +41,12 @@
             return _skills.SingleOrDefault(s => s.Id == id);
         }
 
+        public Guid GetSkillIdByName(string name)
+        {
+            Skill s = _skills.SingleOrDefault(s => s.Name == name);
+            return s.Id; 
+        } 
+
         public List<Skill> GetSkills()
         {
             return _skills;

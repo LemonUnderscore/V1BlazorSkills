@@ -14,6 +14,9 @@
             <td>
                 Name
             </td>
+            <td>
+                Skills
+            </td>
             <td></td>
             <td></td>
         </tr>
@@ -29,6 +32,12 @@
                 </td>
                 <td>
                     @emp.Name
+                </td>
+                <td>
+                    @foreach (KeyValuePair<string, int> item in emp.EmployeeSkills)
+                    {
+                        <p>@item.Key - @item.Value Years</p>
+                    }
                 </td>
                 <td>
                     <a class="btn btn-primary" href="editemployee/@emp.Id">

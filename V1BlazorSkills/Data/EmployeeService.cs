@@ -8,11 +8,21 @@
             {
                 Id = Guid.NewGuid(),
                 Name= "Test1",
+                EmployeeSkills = new Dictionary<string, int>()
+                {
+                    {"JavaScript", 0},
+                    {"C#", 2}
+                }
             },
             new Employee
             {
                 Id = Guid.NewGuid(),
                 Name = "Test2",
+                EmployeeSkills = new Dictionary<string, int>()
+                {
+                    {"JavaScript", 5},
+                    {"C#", 1}
+                }
             }
         };
 

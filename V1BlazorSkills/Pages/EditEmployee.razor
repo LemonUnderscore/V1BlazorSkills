@@ -11,6 +11,28 @@
         <label>Name</label>
         <InputText id="name" class="form-control" name="name" @bind-Value="employee.Name"></InputText>
     </div>
+
+    <button type="button" class="btn btn-success" @onclick="( e => AddNewSkill())"> Add New Skill</button>
+
+    @foreach (var item in SelectionBindings)
+    {
+        var index = SelectionBindings.IndexOf(item);
+        <div class="form-group p-2 m-1 bg-light">
+            <span>Skill</span>
+            <select id="@index" @bind="SelectionBindings[index]">
+                <option selected hidden>Select a Skill</option>
+                @foreach (var skill in _allSkills)
+                        {
+
+                            <option value="@skill.Id">@skill.Name</option>
+                        }
+            </select>
+            <span>Years of Experience:</span>
+            <input type="number"/>
+        </div>
+    }
+
+
     <button type="submit" class="btn btn-primary">Save Changes ✔</button>
 </EditForm>
 
@@ -21,19 +43,44 @@
     [Parameter]
     public string Id { get; set; }
 
-    private V1BlazorSkills.Data.Employee employee { get; set; }
+    private Data.Employee employee { get; set; }
+    private List<Data.Skill> _allSkills;
+    private Dictionary<string, int> EmployeeSkills { get; set; } = new Dictionary<string, int>();
+    private Dictionary<string, int> SelectedSkills { get; set; } = new Dictionary<string, int>();
+    private List<string> SelectionBindings { get; set; } = new List<string>();
+    private List<int> SelectionValueBindings { get; set; } = new List<int>();
 
     protected override void OnInitialized()
     {
+        //get all defined skills
+        _allSkills = SkillService.GetSkills();
+
         if( !string.IsNullOrEmpty(Id) && Id == "0")
         {
             employee = new Data.Employee();
         }
-        else employee = EmployeeService.GetEmployee(Guid.Parse(Id));
+        else
+        {
+            employee = EmployeeService.GetEmployee(Guid.Parse(Id));
+            SelectedSkills = employee.EmployeeSkills;
+        }
     }
 
     private void SubmitForm()
     {
+        List<string> SelectionNames = new List<string>();
+        foreach (string s in SelectionBindings)
+        {
+            Guid id = Guid.Parse(s);
+            string name = SkillService.GetSkill(id).Name;
+            SelectionNames.Add(name);
+        }
+
+        var dictionary = SelectionNames.Zip(SelectionValueBindings, (k, v) => new { k, v })
+              .ToDictionary(x => x.k, x => x.v);
+
+        employee.EmployeeSkills = dictionary;
+
         if (employee.Id == Guid.Empty)
         {
             EmployeeService.AddEmployee(employee);
@@ -44,5 +91,15 @@
     }
 
     //Skill dict assembly
-    private List<Data.Skill> SkillAssembly { get; set; } = new List<Data.Skill>();
+
+    public void AddNewSkill()
+    {
+        SelectionBindings.Add("");
+        SelectionValueBindings.Add(0);
+    }
+
+    //void SelectedSkillsChanged(ChangeEventArgs e)
+    //{
+    //    SelectedSkills = (List<string>)e.Value;
+    //}
 }

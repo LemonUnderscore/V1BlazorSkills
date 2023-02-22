@@ -20,7 +20,7 @@
     [Parameter]
     public string Id { get; set; }
 
-    private V1BlazorSkills.Data.Skill skill { get; set; }
+    private Data.Skill skill { get; set; }
 
     protected override void OnInitialized()
     {
@@ -39,6 +39,6 @@
         }
         else SkillService.UpdateSkill(skill);
 
-        Navigation.NavigateTo("skills");
+        Navigation.NavigateTo("skillstable");
     }
 }

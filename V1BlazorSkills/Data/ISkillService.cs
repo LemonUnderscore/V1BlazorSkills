@@ -6,6 +6,8 @@
 
         Skill GetSkill(Guid id);
 
+        Guid GetSkillIdByName(string name);
+
         void UpdateSkill(Skill s);
 
         void AddSkill(Skill s);
