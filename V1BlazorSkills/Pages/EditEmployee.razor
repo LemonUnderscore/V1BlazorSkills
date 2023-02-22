@@ -1,5 +1,35 @@
-﻿<h3>Edit Employee</h3>
+﻿@page "/editemployee/{id}"
+<h3>Edit Employee</h3>
 
+<EditForm Model="employee" OnSubmit="@SubmitForm">
+    <div class="form-group">
+        <label>Id</label>
+        <input id="id" class="form-control" name="id" value="@employee.Id" readonly/>
+    </div>
+
+    <div class="form-group">
+        <label>Id</label>
+        <InputText id="name" class="form-control" name="name" @bind-Value="employee.Name"></InputText>
+    </div>
+    <button type="submit" class="btn btn-primary">Save Changes ✔</button>
+</EditForm>
+
+@inject V1BlazorSkills.Data.IEmployeeService EmployeeService
+@inject NavigationManager Navigation
 @code {
+    [Parameter]
+    public string Id { get; set; }
 
+    private V1BlazorSkills.Data.Employee employee { get; set; }
+
+    protected override void OnInitialized()
+    {
+        employee = EmployeeService.GetEmployee(Guid.Parse(Id));
+    }
+
+    private void SubmitForm()
+    {
+        EmployeeService.UpdateEmployee(employee);
+        Navigation.NavigateTo("employees");
+    }
 }
