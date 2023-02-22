@@ -1,0 +1,60 @@
+﻿@page "/skillstable"
+<h3>Skills</h3>
+
+<a class="btn btn-success" href="editskill/0">
+    Add New ➕
+</a>
+<table class="table">
+
+    <thead>
+        <tr>
+            <td>
+                Id
+            </td>
+            <td>
+                Name
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var skill in _skills)
+        {
+            <tr>
+                <td>
+                    @skill.Id
+                </td>
+                <td>
+                    @skill.Name
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="editskill/@skill.Id">
+                        Edit 🖊
+                    </a>
+                </td>
+                <td>
+                    <button class="btn btn-danger" @onclick="@( e => OnDelete(skill.Id) )"> Delete 🗑 </button>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
+@inject V1BlazorSkills.Data.ISkillService SkillService;
+@code {
+    private List<V1BlazorSkills.Data.Skill> _skills;
+    protected override void OnInitialized()
+    {
+        _skills = SkillService.GetSkills();
+    }
+
+    private void OnDelete(Guid id)
+    {
+        SkillService.DeleteSkill(id);
+    }
+}
