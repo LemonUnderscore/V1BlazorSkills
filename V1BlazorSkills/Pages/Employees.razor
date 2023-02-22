@@ -1,0 +1,43 @@
+﻿@page "/employees"
+<h3>Employees</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>
+                Id
+            </td>
+            <td>
+                Name
+            </td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var e in _employees)
+        {
+            <tr>
+            <td>
+                @e.Id
+            </td>
+            <td>
+                @e.Name
+            </td>
+            <td>
+                <a href="employee/@e.Id">
+                    Edit
+                </a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+@inject V1BlazorSkills.Data.IEmployeeService EmployeeService;
+@code {
+    private List<V1BlazorSkills.Data.Employee> _employees;
+    protected override void OnInitialized()
+    {
+        _employees = EmployeeService.GetEmployees();
+    }
+}
