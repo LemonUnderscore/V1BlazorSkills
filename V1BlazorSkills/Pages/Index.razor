@@ -7,3 +7,13 @@
 Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
+
+@inject Data.ISkillService SkillService
+@inject Data.IEmployeeService EmployeeService
+@inject Data.ITeamService TeamService
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await SkillService.GetSkillsAsync();
+    }
+}

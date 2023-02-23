@@ -4,6 +4,8 @@
     {
         List<Skill> GetSkills();
 
+        Task<List<Dictionary<string, string>>> GetSkillsAsync();
+
         Skill GetSkill(Guid id);
 
         Guid GetSkillIdByName(string name);

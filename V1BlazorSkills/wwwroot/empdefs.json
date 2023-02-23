@@ -1,0 +1,54 @@
+{
+  "AllEmployees": [
+    {
+      "name": "Bird Ramsey",
+      "aboutMe": "I am a punctual and motivated individual who is able to work in a busy environment and produce high standards of work. I am an excellent team worker and am able to take instructions from all levels and build up good working relationships with all colleagues. I am flexible, reliable and possess excellent time keeping skills.",
+      "contact": {
+        "email": "birdramseys@gmail.com",
+        "linkedin": "https://www.linkedin.com/in/birdramseyworld/",
+        "github": "https://github.com/birdram"
+      },
+      "certificates": "Certified cloud security professional (CCSP), Oracle database and MySQL administration certifications, Project management professional (PMP)"
+    },
+    {
+      "name": "Lillian Burgees",
+      "aboutMe": "I am an enthusiastic, self-motivated, reliable, responsible and hard working person. I am a mature team worker and adaptable to all challenging situations. I am able to work well both in a team environment as well as using own initiative. I am able to work well under pressure and adhere to strict deadlines.",
+      "contact": {
+        "email": "lilliburg93@hotmail.com",
+        "linkedin": "https://www.linkedin.com/in/liliburgees/",
+        "github": "https://github.com/lilidev"
+      },
+      "certificates": "Salesforce certified development lifecycle and deployment designer, AWS certified cloud practitioner, Certified cloud security professional (CCSP), Certified data privacy solutions engineer (CDPSE)"
+    },
+    {
+      "name": "Kristie Cole",
+      "aboutMe": "I am a dedicated, organized and methodical individual. I have good interpersonal skills, am an excellent team worker and am keen and very willing to learn and develop new skills. I am reliable and dependable and often seek new responsibilities within a wide range of employment areas. I have an active and dynamic approach to work and getting things done. I am determined and decisive. I identify and develop opportunities.",
+      "contact": {
+        "email": "kristie_cole@icloud.com",
+        "linkedin": "https://www.linkedin.com/in/kristiecole/",
+        "github": "https://github.com/kriscol"
+      },
+      "certificates": "Certified data professional (CDP), Information technology infrastructure library (ITIL), Microsoft certified solutions associate/expert (MCSA/MCSE)"
+    },
+    {
+      "name": "Leonor Cross",
+      "aboutMe": "I’m a nice fun and friendly person, I’m honest and punctual, I work well in a team but also on my own as I like to set myself goals which I will achieve, I have good listening and communication skills. I have a creative mind and am always up for new challenges. I am well organized and always plan ahead to make sure I manage my time well.",
+      "contact": {
+        "email": "leonorcrossing@yahoo.com",
+        "linkedin": "https://www.linkedin.com/in/leonorcrossers/",
+        "github": "https://github.com/leocro"
+      },
+      "certificates": "Microsoft Certified Azure Solutions Architect, CompTIA (A+, Cloud+, Security+), Cisco certified network professional (CCNP)"
+    },
+    {
+      "name": "Marsh Mccall",
+      "aboutMe": "I am an experienced joiner with well developed skills and experience in groundwork, concrete finishing and steel fixing and have worked in the construction industry since 1982. I am also a skilled labourer who has supported many different trades over the years. I have a full clean UK driving licence with entitlement of up to 7.5 tonne. I am keen to return to work after a period of training and personal development which has broadened my skills and experiences.",
+      "contact": {
+        "email": "marsh-mccall82@gmail.com",
+        "linkedin": "https://www.linkedin.com/in/marshmccalljhonson/",
+        "github": "https://github.com/marshmallow"
+      },
+      "certificates": "Cisco certified internetwork expert (CCIE), Microsoft certified solutions developer (MCSD), Certified ScrumMaster(CSM), Certified data professional (CDP)"
+    }
+  ]
+}
