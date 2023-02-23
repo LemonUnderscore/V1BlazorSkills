@@ -12,7 +12,7 @@
         <InputText id="name" class="form-control" name="name" @bind-Value="team.Name"></InputText>
     </div>
 
-    <button type="button" class="btn btn-success" @onclick="( e => AddNewEmployee())"> Add New Skill</button>
+    <button type="button" class="btn btn-success" @onclick="( e => AddNewEmployee())"> Add New Member</button>
 
     @foreach (var item in SelectionBindings)
     {
@@ -40,11 +40,9 @@
 @code {
     [Parameter]
     public string Id { get; set; }
-
     private Data.Team team { get; set; }
-
     private List<Data.Employee> _allEmployees;
-
+    private List<Data.Employee> SelectedMembers { get; set; } = new List<Data.Employee>();
     private List<string> SelectionBindings { get; set; } = new List<string>();
 
     protected override void OnInitialized()
@@ -55,19 +53,38 @@
         {
             team = new Data.Team();
         }
-        else team = TeamService.GetTeam(Guid.Parse(Id));
+        else
+        {
+            team = TeamService.GetTeam(Guid.Parse(Id));
+            SelectedMembers = team.Employees;
+            foreach (Data.Employee member in SelectedMembers)
+            {
+                SelectionBindings.Add(member.Id.ToString());
+            }
+        }
     }
 
     private void SubmitForm()
     {
         Data.Team updated;
+        List<Data.Employee> TeamAssembly = new List<Data.Employee>();
+        updated = team;
+
+        foreach (string s in SelectionBindings)
+        {
+            Guid id = Guid.Parse(s);
+            Data.Employee emp = EmployeeService.GetEmployee(id);
+            TeamAssembly.Add(emp);
+        }
+
+        updated.Employees = TeamAssembly;
+
         if (team.Id == Guid.Empty)
         {
             TeamService.AddTeam(team);
         }
         else
         {
-            updated = team;
             TeamService.UpdateTeam(team, updated);
         }
 
