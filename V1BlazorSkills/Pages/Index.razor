@@ -1,4 +1,5 @@
 ﻿@page "/"
+@attribute [Authorize]
 
 <PageTitle>SkillsMatrix - Home</PageTitle>
 
@@ -6,4 +7,12 @@
 
 <input type="search"/>
 
-
+@inject Data.ISkillService SkillService
+@inject Data.IEmployeeService EmployeeService
+@inject Data.ITeamService TeamService
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await SkillService.GetSkillsAsync();
+    }
+}

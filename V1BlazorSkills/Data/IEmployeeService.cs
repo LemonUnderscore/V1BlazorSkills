@@ -6,7 +6,7 @@
 
         Employee GetEmployee(Guid id);
 
-        void UpdateEmployee(Employee e);
+        void UpdateEmployee(Employee e, Employee u);
 
         void AddEmployee(Employee e);
 

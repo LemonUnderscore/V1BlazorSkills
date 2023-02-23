@@ -74,6 +74,7 @@
 
     private void SubmitForm()
     {
+        Data.Employee updated = employee;
         List<string> SelectionNames = new List<string>();
         foreach (string s in SelectionBindings)
         {
@@ -82,16 +83,16 @@
             SelectionNames.Add(name);
         }
 
-        var dictionary = SelectionNames.Zip(SelectionValueBindings, (k, v) => new { k, v })
-              .ToDictionary(x => x.k, x => x.v);
+        var dictionary = SelectionNames.Zip(SelectionValueBindings, (k, v) =>
+        new { k, v }).ToDictionary(x => x.k, x => x.v);
 
-        employee.EmployeeSkills = dictionary;
+        updated.EmployeeSkills = dictionary;
 
         if (employee.Id == Guid.Empty)
         {
             EmployeeService.AddEmployee(employee);
         }
-        else EmployeeService.UpdateEmployee(employee);
+        else EmployeeService.UpdateEmployee(employee, updated);
 
         Navigation.NavigateTo("employees");
     }
@@ -103,9 +104,4 @@
         SelectionBindings.Add("");
         SelectionValueBindings.Add(0);
     }
-
-    //void SelectedSkillsChanged(ChangeEventArgs e)
-    //{
-    //    SelectedSkills = (List<string>)e.Value;
-    //}
 }

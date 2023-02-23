@@ -10,8 +10,7 @@
                 Name= "Test1",
                 EmployeeSkills = new Dictionary<string, int>()
                 {
-                    {"JavaScript", 0},
-                    {"C#", 2}
+                    {"JavaScript", 1},
                 }
             },
             new Employee
@@ -21,7 +20,6 @@
                 EmployeeSkills = new Dictionary<string, int>()
                 {
                     {"JavaScript", 5},
-                    {"C#", 1}
                 }
             }
         };
@@ -49,10 +47,11 @@
             return _employees;
         }
 
-        public void UpdateEmployee(Employee e)
+        public void UpdateEmployee(Employee e, Employee updated)
         {
             var getOldEmployeeData = GetEmployee(e.Id);
-            getOldEmployeeData.Name = e.Name;
+            getOldEmployeeData.Name = updated.Name;
+            getOldEmployeeData.EmployeeSkills = updated.EmployeeSkills;
         }
     }
 }
