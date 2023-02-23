@@ -49,10 +49,11 @@
             return _employees;
         }
 
-        public void UpdateEmployee(Employee e)
+        public void UpdateEmployee(Employee e, Employee updated)
         {
             var getOldEmployeeData = GetEmployee(e.Id);
-            getOldEmployeeData.Name = e.Name;
+            getOldEmployeeData.Name = updated.Name;
+            getOldEmployeeData.EmployeeSkills = updated.EmployeeSkills;
         }
     }
 }
