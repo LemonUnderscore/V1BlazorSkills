@@ -1,0 +1,67 @@
+﻿@page "/teamstable"
+<h3>Teams Table</h3>
+
+<a class="btn btn-success" href="editteam/0">
+    Add New ➕
+</a>
+<table class="table">
+
+    <thead>
+        <tr>
+            <td>
+                Id
+            </td>
+            <td>
+                Name
+            </td>
+            <td>Members</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var team in _teams)
+        {
+            <tr>
+                <td>
+                    @team.Id
+                </td>
+                <td>
+                    @team.Name
+                </td>
+                <td>
+                    @foreach (Data.Employee emp in team.Employees)
+                    {
+                        <p>@emp.Name</p>
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="editteam/@team.Id">
+                        Edit 🖊
+                    </a>
+                </td>
+                <td>
+                    <button class="btn btn-danger" @onclick="@( e => OnDelete(team.Id) )"> Delete 🗑 </button>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
+@inject Data.ITeamService TeamService;
+@code {
+    private List<Data.Team> _teams;
+    protected override void OnInitialized()
+    {
+        _teams = TeamService.GetTeams();
+    }
+
+    private void OnDelete(Guid id)
+    {
+        TeamService.DeleteTeam(id);
+    }
+}

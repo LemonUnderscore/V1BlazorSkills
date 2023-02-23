@@ -1,27 +1,40 @@
-﻿namespace V1BlazorSkills.Data
+﻿using Newtonsoft.Json;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace V1BlazorSkills.Data
 {
     public class SkillService : ISkillService
     {
+        private List<Skill> _skills = new List<Skill>();
 
-        private List<Skill> _skills = new List<Skill>
+        public Task<List<Dictionary<string, string>>> GetSkillsAsync()
         {
-            new Skill
+            List<Dictionary<string, string>> l = new List<Dictionary<string, string>>();
+            if (_skills.Count == 0)
             {
-                Id = Guid.NewGuid(),
-                Name= "JavaScript",
-            },
-            new Skill
-            {
-                Id = Guid.NewGuid(),
-                Name = "Java",
-            },
-            new Skill
-            {
-                Id = Guid.NewGuid(),
-                Name = "C#",
-            }
-        };
+                string _skillDefsRaw = File.ReadAllText("wwwroot/skilldefs.json");
+                dynamic values = JsonConvert.DeserializeObject(_skillDefsRaw);
+                foreach (var item in values.AllSkills)
+                {
+                    var dict = JsonConvert.DeserializeObject<Dictionary<string, string>>(item.ToString());
+                    l.Add(dict);
+                }
 
+                foreach (var dict in l)
+                {
+                    Skill s = new Skill
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = dict["name"],
+                        Category = dict["categoryName"],
+                    };
+                    _skills.Add(s);
+                }
+            }
+
+
+            return Task.FromResult(l);
+        }
 
         public void AddSkill(Skill s)
         {

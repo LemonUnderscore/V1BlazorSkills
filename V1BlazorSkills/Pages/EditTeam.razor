@@ -1,0 +1,98 @@
+﻿@page "/editteam/{id}"
+<h3>Edit Team</h3>
+
+<EditForm Model="team" OnSubmit="@SubmitForm">
+    <div class="form-group">
+        <label>Id</label>
+        <input id="id" class="form-control" name="id" value="@team.Id" readonly />
+    </div>
+
+    <div class="form-group">
+        <label>Team Name</label>
+        <InputText id="name" class="form-control" name="name" @bind-Value="team.Name"></InputText>
+    </div>
+
+    <button type="button" class="btn btn-success" @onclick="( e => AddNewEmployee())"> Add New Member</button>
+
+    @foreach (var item in SelectionBindings)
+    {
+        var index = SelectionBindings.IndexOf(item);
+            <div class="form-group p-2 m-1 bg-light">
+                <span>Skill</span>
+                <select id="@index" @bind="SelectionBindings[index]">
+                    <option selected hidden>Select a Skill</option>
+                @foreach (var emp in _allEmployees)
+                {
+
+                                    <option value="@emp.Id">@emp.Name</option>
+                }
+                </select>
+                <span>Employee Skills:</span>
+            </div>
+    }
+
+    <button type="submit" class="btn btn-primary">Save Changes ✔</button>
+</EditForm>
+
+@inject Data.ITeamService TeamService
+@inject Data.IEmployeeService EmployeeService
+@inject NavigationManager Navigation
+@code {
+    [Parameter]
+    public string Id { get; set; }
+    private Data.Team team { get; set; }
+    private List<Data.Employee> _allEmployees;
+    private List<Data.Employee> SelectedMembers { get; set; } = new List<Data.Employee>();
+    private List<string> SelectionBindings { get; set; } = new List<string>();
+
+    protected override void OnInitialized()
+    {
+        _allEmployees = EmployeeService.GetEmployees();
+
+        if (!string.IsNullOrEmpty(Id) && Id == "0")
+        {
+            team = new Data.Team();
+        }
+        else
+        {
+            team = TeamService.GetTeam(Guid.Parse(Id));
+            SelectedMembers = team.Employees;
+            foreach (Data.Employee member in SelectedMembers)
+            {
+                SelectionBindings.Add(member.Id.ToString());
+            }
+        }
+    }
+
+    private void SubmitForm()
+    {
+        Data.Team updated;
+        List<Data.Employee> TeamAssembly = new List<Data.Employee>();
+        updated = team;
+
+        foreach (string s in SelectionBindings)
+        {
+            Guid id = Guid.Parse(s);
+            Data.Employee emp = EmployeeService.GetEmployee(id);
+            TeamAssembly.Add(emp);
+        }
+
+        updated.Employees = TeamAssembly;
+
+        if (team.Id == Guid.Empty)
+        {
+            TeamService.AddTeam(team);
+        }
+        else
+        {
+            TeamService.UpdateTeam(team, updated);
+        }
+
+        Navigation.NavigateTo("teamstable");
+    }
+
+    public void AddNewEmployee()
+    {
+        SelectionBindings.Add("");
+    }
+}
