@@ -17,18 +17,32 @@
     @foreach (var item in SelectionBindings)
     {
         var index = SelectionBindings.IndexOf(item);
-            <div class="form-group p-2 m-1 bg-light">
-                <span>Skill</span>
-            <select class="form-choose" id="@index" @bind="SelectionBindings[index]">
-                    <option selected hidden>Select a Skill</option>
-                @foreach (var emp in _allEmployees)
-                {
+        var empskills = new Dictionary<string, int>();
+        try
+        {
+            empskills = EmployeeService.GetEmployee(Guid.Parse(SelectionBindings[index])).EmployeeSkills;
+        }
+        catch
+        {
+            empskills = new Dictionary<string, int>();
+        }
 
-                                    <option value="@emp.Id">@emp.Name</option>
-                }
-                </select>
-                <span>Employee Skills:</span>
-            </div>
+        <div class="form-group p-2 m-1 bg-light">
+            <span>Member: </span>
+        <select class="form-choose" id="@index" @bind="SelectionBindings[index]">
+            <option selected hidden>Select a Member</option>
+            @foreach (var emp in _allEmployees)
+            {
+
+                <option value="@emp.Id">@emp.Name</option>
+            }
+        </select>
+            <span>Skills:</span>
+            @foreach (KeyValuePair<string, int> entry in empskills)
+            {
+                <span class="m-1">@entry.Key: @entry.Value</span>
+            }
+        </div>
     }
 
     <button type="submit" class="btn btn-primary">Save Changes</button>
