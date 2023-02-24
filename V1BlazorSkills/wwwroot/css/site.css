@@ -31,8 +31,10 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 30px;
 }
 
-h1:focus {
+h1, h1:focus {
     outline: none;
+    text-align:center;
+    margin-top: 30px;
 }
 
 p {
@@ -135,6 +137,46 @@ label {
     border: 1px solid var(--colour-font);
     border-radius: 4px;
     color: var(--colour-font);
+}
+
+.home-titles {
+    margin: 15px;
+    padding:0;
+}
+
+.result-box {
+    background-color: var(--colour-primary-teal);
+    margin: 8px;
+    padding: 4px 16px;
+    color: var(--colour-dominant);
+}
+
+.result-box:hover {
+    background-color: var(--colour-primary-seafoam);
+}
+
+.result-box > div {
+    margin: 15px 0;
+}
+
+.result-box strong {
+    font-size: 17px;
+}
+.result-box a {
+    font-size: 14px;
+    text-decoration:underline;
+}
+.result-box a:hover {
+    color: var(--colour-secondary-action);
+}
+
+.result-name {
+    text-align: center;
+}
+
+.result-name h4 {
+    color: var(--colour-dominant);
+    margin-bottom: 0;
 }
 
 .content {
