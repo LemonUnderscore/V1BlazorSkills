@@ -149,6 +149,8 @@ label {
     margin: 8px;
     padding: 4px 16px;
     color: var(--colour-dominant);
+    min-width: 250px;
+    max-width: 300px;
 }
 
 .result-box:hover {
@@ -167,7 +169,7 @@ label {
     text-decoration:underline;
 }
 .result-box a:hover {
-    color: var(--colour-secondary-action);
+    color: var(--colour-background);
 }
 
 .result-name {
