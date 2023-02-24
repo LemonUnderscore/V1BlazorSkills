@@ -126,6 +126,17 @@ label {
     width: 30%;
 }
 
+.search-bar {
+    background: url(../img/magnifying-glass-solid.svg) right 15px center no-repeat border-box;
+    background-size: 20px;
+    padding: 10px 10px;
+    width: 80%;
+    margin: 5% 10%;
+    border: 1px solid var(--colour-font);
+    border-radius: 4px;
+    color: var(--colour-font);
+}
+
 .content {
     padding-top: 1.1rem;
 }
