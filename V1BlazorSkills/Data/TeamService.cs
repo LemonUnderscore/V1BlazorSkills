@@ -4,18 +4,6 @@
     {
         private List<Team> _teams = new List<Team>
         {
-            new Team
-            {
-                Id = Guid.NewGuid(),
-                Name = "Test Team 1",
-                Employees= new List<Employee> {}
-            },
-            new Team
-            {
-                Id = Guid.NewGuid(),
-                Name = "Test Team 2",
-                Employees= new List<Employee> {}
-            }
         };
 
         public void AddTeam(Team t)

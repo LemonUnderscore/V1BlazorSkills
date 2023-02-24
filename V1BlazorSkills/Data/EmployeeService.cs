@@ -7,19 +7,24 @@
             new Employee
             {
                 Id = Guid.NewGuid(),
-                Name= "Test1",
+                Name= "Katherine Janeway",
                 EmployeeSkills = new Dictionary<string, int>()
                 {
-                    {"JavaScript", 1},
+                    {"Coaching", 12},
+                    {"Go", 10},
+                    {"Project Coordination", 15},
                 }
             },
             new Employee
             {
                 Id = Guid.NewGuid(),
-                Name = "Test2",
+                Name = "Jean Luc Picard",
                 EmployeeSkills = new Dictionary<string, int>()
                 {
-                    {"JavaScript", 5},
+                    {"Project Coordination", 15},
+                    {"Negotiation", 13},
+                    {"Docker", 13},
+                    {"Building Trust", 13},
                 }
             }
         };
