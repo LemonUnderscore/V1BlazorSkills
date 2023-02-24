@@ -1,16 +1,17 @@
 ﻿@page "/employees"
 <h3>Employees</h3>
 
-<a class="btn btn-success" href="editemployee/0">
-    Add New ➕
+<a class="btn btn-action" href="editemployee/0">
+    New  
+    <i class="fa-solid fa-plus"></i>
 </a>
 <table class="table">
 
     <thead>
         <tr>
-            <td>
+            <!--<td>
                 Id
-            </td>
+            </td>-->
             <td>
                 Name
             </td>
@@ -27,9 +28,9 @@
         @foreach(var emp in _employees)
         {
             <tr>
-                <td>
+                <!--<td>
                     @emp.Id
-                </td>
+                </td>-->
                 <td>
                     @emp.Name
                 </td>
@@ -40,12 +41,14 @@
                     }
                 </td>
                 <td>
-                    <a class="btn btn-primary" href="editemployee/@emp.Id">
-                        Edit 🖊
+                    <a class="btn btn-transparent" href="editemployee/@emp.Id">
+                        <i class="fa-regular fa-pen-to-square btn-icon"></i>
                     </a>
                 </td>
                 <td>
-                    <button class="btn btn-danger" @onclick="@( e => OnDelete(emp.Id) )"> Delete 🗑 </button>
+                    <button class="btn btn-transparent" @onclick="@( e => OnDelete(emp.Id) )" title="Delete">
+                        <i class="fa-regular fa-trash-can btn-icon-danger"></i>
+                    </button>
                 </td>
             </tr>
         }
