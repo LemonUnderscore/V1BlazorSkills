@@ -1,14 +1,15 @@
 ﻿@page "/skillstable"
 <h3>Skills</h3>
 
-<a class="btn btn-success" href="editskill/0">
-    Add New ➕
+<a class="btn btn-action" href="editskill/0">
+    New
+    <i class="fa-solid fa-plus"></i>
 </a>
 <table class="table">
 
     <thead>
         <tr>
-            <td>Id</td>
+            <!--<td>Id</td>-->
             <td>Name</td>
             <td>Category</td>
             <td></td>
@@ -21,9 +22,9 @@
         @foreach (var skill in _skills)
         {
             <tr>
-                <td>
+                <!--<td>
                     @skill.Id
-                </td>
+                </td>-->
                 <td>
                     @skill.Name
                 </td>
@@ -31,12 +32,14 @@
                     @skill.Category
                 </td>
                 <td>
-                    <a class="btn btn-primary" href="editskill/@skill.Id">
-                        Edit 🖊
+                    <a class="btn btn-transparent" href="editskill/@skill.Id">
+                        <i class="fa-regular fa-pen-to-square btn-icon"></i>
                     </a>
                 </td>
                 <td>
-                    <button class="btn btn-danger" @onclick="@( e => OnDelete(skill.Id) )"> Delete 🗑 </button>
+                    <button class="btn btn-transparent" @onclick="@( e => OnDelete(skill.Id) )">
+                        <i class="fa-regular fa-trash-can btn-icon-danger"></i>
+                    </button>
                 </td>
             </tr>
         }

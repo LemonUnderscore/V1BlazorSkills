@@ -12,14 +12,14 @@
         <InputText id="name" class="form-control" name="name" @bind-Value="employee.Name"></InputText>
     </div>
 
-    <button type="button" class="btn btn-success" @onclick="( e => AddNewSkill())"> Add New Skill</button>
+    <button type="button" class="btn btn-action" @onclick="( e => AddNewSkill())"> Add New Skill</button>
 
     @foreach (var item in SelectionBindings)
     {
         var index = SelectionBindings.IndexOf(item);
-        <div class="form-group p-2 m-1 bg-light">
+        <div class="form-group p-2 m-1">
             <span>Skill</span>
-            <select id="@index" @bind="SelectionBindings[index]">
+            <select class="form-choose" id="@index" @bind="SelectionBindings[index]">
                 <option selected hidden>Select a Skill</option>
                 @foreach (var skill in _allSkills)
                         {
@@ -28,12 +28,14 @@
                         }
             </select>
             <span>Years of Experience:</span>
-            <input type="number" @bind="SelectionValueBindings[index]"/>
+            <input class="form-choose" type="number" @bind="SelectionValueBindings[index]"/>
         </div>
     }
 
 
-    <button type="submit" class="btn btn-primary">Save Changes ✔</button>
+    <button type="submit" class="btn btn-primary">
+        Save Changes
+    </button>
 </EditForm>
 
 @inject V1BlazorSkills.Data.IEmployeeService EmployeeService

@@ -1,16 +1,17 @@
 ﻿@page "/teamstable"
 <h3>Teams Table</h3>
 
-<a class="btn btn-success" href="editteam/0">
-    Add New ➕
+<a class="btn btn-action" href="editteam/0">
+    New
+    <i class="fa-solid fa-plus"></i>
 </a>
 <table class="table">
 
     <thead>
         <tr>
-            <td>
+            <!--<td>
                 Id
-            </td>
+            </td>-->
             <td>
                 Name
             </td>
@@ -25,9 +26,9 @@
         @foreach (var team in _teams)
         {
             <tr>
-                <td>
+                <!--<td>
                     @team.Id
-                </td>
+                </td>-->
                 <td>
                     @team.Name
                 </td>
@@ -38,12 +39,14 @@
                     }
                 </td>
                 <td>
-                    <a class="btn btn-primary" href="editteam/@team.Id">
-                        Edit 🖊
+                    <a class="btn btn-transparent" href="editteam/@team.Id">
+                        <i class="fa-regular fa-pen-to-square btn-icon"></i>
                     </a>
                 </td>
                 <td>
-                    <button class="btn btn-danger" @onclick="@( e => OnDelete(team.Id) )"> Delete 🗑 </button>
+                    <button class="btn btn-transparent" @onclick="@( e => OnDelete(team.Id) )">
+                        <i class="fa-regular fa-trash-can btn-icon-danger"></i>
+                    </button>
                 </td>
             </tr>
         }

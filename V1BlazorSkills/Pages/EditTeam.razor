@@ -12,14 +12,14 @@
         <InputText id="name" class="form-control" name="name" @bind-Value="team.Name"></InputText>
     </div>
 
-    <button type="button" class="btn btn-success" @onclick="( e => AddNewEmployee())"> Add New Member</button>
+    <button type="button" class="btn btn-action" @onclick="( e => AddNewEmployee())"> Add New Member</button>
 
     @foreach (var item in SelectionBindings)
     {
         var index = SelectionBindings.IndexOf(item);
             <div class="form-group p-2 m-1 bg-light">
                 <span>Skill</span>
-                <select id="@index" @bind="SelectionBindings[index]">
+            <select class="form-choose" id="@index" @bind="SelectionBindings[index]">
                     <option selected hidden>Select a Skill</option>
                 @foreach (var emp in _allEmployees)
                 {
@@ -31,7 +31,7 @@
             </div>
     }
 
-    <button type="submit" class="btn btn-primary">Save Changes ✔</button>
+    <button type="submit" class="btn btn-primary">Save Changes</button>
 </EditForm>
 
 @inject Data.ITeamService TeamService
